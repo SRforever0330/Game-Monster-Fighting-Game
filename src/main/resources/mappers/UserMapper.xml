@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	<!-- namespace命名空间，非常重要，一致 -->
+<mapper namespace="cn.sxau.zy.mapper.UserMapper">
+	 <!--  需要一个参数：parameterType参数，java.lang.String，string -->
+	<select id="exist"  parameterType="string" resultType="cn.sxau.zy.pojo.User">
+	    select * from user where user.username = #{name}
+	</select>
+	<select id="check" parameterType="string" resultType="cn.sxau.zy.pojo.User">
+		select * from user where user.username = #{username} and user.password = #{password}
+	</select>
+	<select id="get" parameterType="String" resultType="cn.sxau.zy.pojo.User">
+		select * from user where user.username = #{username}
+	</select>
+	<select id="getUsers"  resultType="cn.sxau.zy.pojo.User">
+		select * from user order by maxgrade DESC 
+	</select>
+
+	<insert id='add' parameterType="cn.sxau.zy.pojo.User">INSERT INTO user 
+	VALUES(#{username},#{password},0,0,0,0,0,0)</insert>
+	<update id="update" parameterType="cn.sxau.zy.pojo.User">UPDATE user
+		SET level=#{level},grade=#{grade},time=#{time},energy=#{energy},blood=#{blood},maxgrade=#{maxgrade}
+		WHERE username=#{username}</update>
+</mapper>
